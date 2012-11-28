@@ -1,0 +1,57 @@
+[production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
+resources.view[] = "test"
+
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts/"
+resources.db.adapter = "pdo_mysql"
+resources.db.params.dbname = "zrm"
+resources.db.params.host = "localhost"
+resources.db.params.username = "root"
+resources.db.params.password = "sa"
+
+# Session
+resources.session.use_only_cookies = true
+resources.session.name = "public"
+resources.session.remember_me_seconds = 864000
+resources.session.gc_maxlifetime = 864000
+resources.session.remember_me_seconds = 864000
+resources.session.saveHandler.class = "Zend_Session_SaveHandler_DbTable"
+resources.session.saveHandler.options.name = "session"
+resources.session.saveHandler.options.primary = "id"
+resources.session.saveHandler.options.modifiedColumn = "modified"
+resources.session.saveHandler.options.dataColumn = "data"
+resources.session.saveHandler.options.lifetimeColumn = "lifetime"
+
+# LDAP settings
+ldap.status = 1
+ldap.host = "192.168.122.15"
+ldap.baseDn = "ou=people,dc=inuits,dc=be"
+ldap.port = 389
+ldap.bindRequiresDn = 1
+ldap.developmentAccess = 0
+
+# linkedIn settings
+linkedin.appKey = "q9fgbte7c5x3"
+linkedin.appSecret = "4IDIda7l4Dph3bvK"
+linkedin.callback.protocol = "https"
+linkedin.callback.hostname = "cv.inuits.eu"
+linkedin.callback.port = "443"
+
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
+

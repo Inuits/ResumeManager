@@ -1,0 +1,26 @@
+
+<h3>Personal information</h3>
+<table cellspacing='0' cellpadding='0' width='100%' class="user_personal_info">
+  <tr>
+    <td width='33%' class="user_personal_info_td1">
+      <b>First name:</b><span id="firstName" ><?php print $this->user->getFirstName(); ?></span><div class="clear"></div>
+      <b>Last name:</b><span id="lastName" ><?php print $this->user->getLastName(); ?></span><div class="clear"></div>
+      <b>Location:</b><span id="location" ><?php print $this->user->getLocation(); ?></span><div class="clear"></div>
+    </td>
+    <td width='33%' class="user_personal_info_td2">
+      <b>Date of birth:</b><span id="birthDate" ><?php if ($this->user->getBirthDate() != '0000-00-00') print $this->user->getBirthDate(); ?></span><div class="clear"></div>
+      <b>Place of birth:</b><span id="birthPlace" ><?php print $this->user->getBirthPlace(); ?></span><div class="clear"></div>
+      <b>Social security number:</b><span id="socialSecurity" ><?php print $this->user->getSocialSecurity(); ?></span><div class="clear"></div>
+    </td>
+    <td width='33%' valign="top" class="user_personal_info_td3">
+      <b>Language:</b><span id="language" ><?php print $this->user->getLang(); ?></span><div class="clear"></div>
+      <b>Nationality:</b><span id="nationality" ><?php print $this->user->getNationality(); ?></span><div class="clear"></div>
+      <b>Company:</b><span id="company" ><?php print $this->user->getCompany(); ?></span><div class="clear"></div>
+    </td>
+  </tr>
+</table>
+
+
+<br><br>
+<h3>Profile</h3>
+<div class="user_profile"><span id="profile" ><?php print $this->user->getProfile(); ?></span></div>

@@ -1,0 +1,8 @@
+<script type="text/javascript">
+	
+  Ext.onReady(function() {
+      tables['customerStore'] = Ext.create('Ext.data.Store', customerListStoreData);
+      tables['customer'] = Ext.create('Ext.grid.Panel', customerListGridPanel('Customers list'));
+      userProfileGetSelectionModel('customer');
+  });
+</script>

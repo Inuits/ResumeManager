@@ -1,0 +1,75 @@
+<h2>
+  <?php 
+    if ($this->user['firstName'] && $this->user['lastName']) { 
+        print "{$this->user['firstName']}, {$this->user['lastName']}";
+    } 
+    else {
+        print $this->user['userLogin'];
+    }
+  ?>
+  <div id="userToolBar"> </div>
+</h2>
+
+<script type="text/javascript">
+	var userId = <?php print $this->uid ?>;
+	var userProfileFormStores = new Array();
+  Ext.onReady(function() {
+      userPersonalInfo();
+      userToolBar();
+
+
+      // Skill.
+      tables['skillStore'] = Ext.create('Ext.data.Store', userProfileDataStore('skillCategory', 'skill'));
+      tables['skill'] = Ext.create('Ext.grid.Panel', skillGridPanel('Skills'));
+
+      // Career.
+      tables['careerStore'] = Ext.create('Ext.data.Store', userProfileDataStore('career', 'career'));
+      tables['career'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('career', 'Career history', 'career'));
+      userProfileGetSelectionModel('career');
+  
+      // Training.
+      tables['trainingStore'] = Ext.create('Ext.data.Store', userProfileDataStore('training', 'study'));
+      tables['training'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('training', 'Training', 'study'));
+      userProfileGetSelectionModel('training');
+  
+      // Education.
+      tables['educationStore'] = Ext.create('Ext.data.Store', userProfileDataStore('education', 'study'));
+      tables['education'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('education', 'Education', 'study'));
+      userProfileGetSelectionModel('education');
+  
+      // Publication.
+      tables['publicationStore'] = Ext.create('Ext.data.Store', userProfileDataStore('publication', 'publicity'));
+      tables['publication'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('publication', 'Publication', 'publicity'));
+      userProfileGetSelectionModel('publication');
+  
+      // Talk.
+      tables['talkStore'] = Ext.create('Ext.data.Store', userProfileDataStore('talk', 'publicity'));
+      tables['talk'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('talk', 'Talk', 'publicity'));
+      userProfileGetSelectionModel('talk');
+
+      // Certification.
+      tables['certificationStore'] = Ext.create('Ext.data.Store', userProfileDataStore('certification', 'certification'));
+      tables['certification'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('certification', 'Certification', 'certification'));
+      userProfileGetSelectionModel('certification');
+
+      // Project.
+      tables['projectStore'] = Ext.create('Ext.data.Store', userProfileDataStore('project', 'project'));
+      tables['project'] = Ext.create('Ext.grid.Panel', userProfileGridPanel('project', 'Project', 'project'));
+      userProfileGetSelectionModel('project');
+
+
+
+//    userProsileStoresLoad('nationality');
+//    userProsileStoresLoad('language');
+//    userProsileStoresLoad('location');
+
+      customerStore.load();
+
+
+      
+  });
+</script>
+<div id="user_profile">
+<div id="personal_info"></div>
+
+</div>

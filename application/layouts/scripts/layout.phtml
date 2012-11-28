@@ -1,0 +1,113 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<?php
+$v = '?q2';
+
+$this->headLink()->appendStylesheet('/style.css');
+
+$this->headLink()->appendStylesheet('/scripts/ext/resources/css/ext-all.css'. $v);
+$this->headLink()->appendStylesheet('/scripts/jgrowl/jquery.jgrowl.css'. $v);
+$this->headLink()->appendStylesheet('/scripts/ext/ux/css/TabScrollerMenu.css'. $v);
+$this->headLink()->appendStylesheet('/scripts/ext/ux/css/CheckHeader.css'. $v);
+
+
+$this->headScript()->appendFile('/scripts/ext/ext-all.js'. $v);
+$this->headScript()->appendFile('/scripts/lib/jquery.js'. $v);
+$this->headScript()->appendFile('/scripts/jgrowl/jgrowl_compressed.js'. $v);
+
+$this->headScript()->appendFile('/scripts/init.js'. $v);
+$this->headScript()->appendFile('/scripts/userSkill.js'. $v);
+$this->headScript()->appendFile('/scripts/userProfile.js'. $v);
+$this->headScript()->appendFile('/scripts/userCareer.js'. $v);
+$this->headScript()->appendFile('/scripts/userPublicity.js'. $v);
+$this->headScript()->appendFile('/scripts/userStudy.js'. $v);
+$this->headScript()->appendFile('/scripts/userList.js'. $v);
+$this->headScript()->appendFile('/scripts/customers.js'. $v);
+$this->headScript()->appendFile('/scripts/resumeExport.js'. $v);
+$this->headScript()->appendFile('/scripts/userCertification.js'. $v);
+$this->headScript()->appendFile('/scripts/userProject.js'. $v);
+
+?>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php print $this->headTitle() ?>
+<?php print $this->headScript() ?>
+<?php print $this->headStyle() ?>
+<?php print $this->headLink() ?>
+
+
+<script type="text/javascript">
+/*<![CDATA[*/
+	var is_allowed = [];
+  <?php
+      $acl = new Application_Model_Acl();
+      $resources = $acl->getResources();
+      foreach ($resources as $resource_item) {
+          if ($acl->can($resource_item)){
+              print "	is_allowed.{$resource_item} = true; \r\n";
+          }
+          else {
+              print "	is_allowed.{$resource_item} = false; \r\n";
+          }
+      }
+  ?>
+/* ]]>*/
+</script>
+</head>
+
+  <?php
+  $storage = new Zend_Auth_Storage_Session();
+  $user = $storage->read();
+
+  $controllerName = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+  $actionName = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
+
+  $employees = '<a href="/user">Employees</a>';
+  $customers = '<a href="/customer">Customers</a>';
+  if ($actionName == 'index') {
+      if ($controllerName == 'user') {
+          $employees = 'Employees';
+      }
+      if ($controllerName == 'customer') {
+          $customers = 'Customers';
+      }
+  }
+  ?>
+
+
+<body class="nihilo controllerName_<?php print $controllerName ?>">
+
+<!-- container -->
+<div id="container">
+
+<h1 class="title">Resume manager</h1>
+  <?php if($acl->can('user_res')): ?>
+<ul id="mainMenu">
+<?php if ($acl->can('show_any_cv')) print '<li>'. $employees .'</li>' ?>
+<?php if ($acl->can('show_customers')) print '<li>'. $customers .'</li>' ?>
+<?php if ($acl->can('show_customers') || $acl->can('show_any_cv')) print '<li class="menu_explode" ></li>' ?>
+	<li class="user_info">
+	<?php if (!$acl->can('show_customers') && !$acl->can('show_any_cv')) {
+	    print 'You are logged in as <b>'. $user->user_login .'</b>. (<a href="/user/logout">logout</a>)';
+	}
+	else {
+	    print '<a href="/user/view/uid/'. $user->uid .'">'. $user->user_login .'</a> (<a href="/user/logout">logout</a>)';
+	}
+	?></li>
+</ul>
+<?php endif; ?> <?php if($acl->can('user_res')): ?>
+<div id="content"><?php print $this->layout()->content ?></div>
+<?php else: ?>
+<div id="content">
+<h2>Login</h2>
+<script type="text/javascript">
+        Ext.onReady(function() {
+            userLoginForm();
+        });
+      </script></div>
+<?php endif; ?></div>
+</body>
+</html>

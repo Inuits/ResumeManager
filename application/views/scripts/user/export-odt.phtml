@@ -1,0 +1,34 @@
+<?php
+
+try {
+    require_once('/var/www/zrm/library/odtphp/library/odf.php');
+
+    $username = 'Smith';
+    $resume_build_id = 1;
+    
+    $a = $this;
+    
+    $config = array(
+      'ZIP_PROXY' => 'PhpZipProxy', // Make sure you have Zip extension loaded
+    );
+
+    // TODO: maybe it is better to use more correct way to determine path
+    // Just lack of knowledge at the moment
+    $template = realpath(dirname(__FILE__)) . "/../../../templates/cv.odt";
+    $odf = new odf($template, $config);
+
+    $odf->setVars('title', 'PHP');
+
+    // TODO: support national letters, this is IMPORTANT!
+    $message = "Message text in any laguage (français, etc) ...";
+
+    $odf->setVars('message', $message);
+
+    $odf->exportAsAttachedFile('CV_' . $username . '_' . $resume_build_id . '.odt');
+} 
+catch (Exception $e) 
+{
+    echo $e->getMessage();
+}
+
+?>

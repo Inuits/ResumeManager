@@ -1,0 +1,25 @@
+# create project and go inside
+zf create project zrm
+cd zrm
+
+#symlink to the Z library
+ln -s /usr/local/zend/share/ZendFramework/library/Zend library/Zend
+
+#TODO: add the following line
+#   resources.view[] =
+# to [production] section
+
+#copy this script
+mkdir scripts
+cp ../$(basename $0) scripts/$(basename $0)
+
+#enable layout
+zf enable layout
+
+#TODO: create MySQL DB
+
+#create MySQL adapters
+zf configure db-adapter \
+'adapter=pdo_mysql&dbname=zrm&host=localhost&username=admin&password=admin' \
+production
+
