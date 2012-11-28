@@ -30,18 +30,18 @@ resources.session.saveHandler.options.dataColumn = "data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 
 # LDAP settings
-ldap.status = 1
-ldap.host = "192.168.122.15"
-ldap.baseDn = "ou=people,dc=inuits,dc=be"
+ldap.status = 0
+ldap.host = "127.0.0.1"
+ldap.baseDn = ""
 ldap.port = 389
 ldap.bindRequiresDn = 1
 ldap.developmentAccess = 0
 
 # linkedIn settings
-linkedin.appKey = "q9fgbte7c5x3"
-linkedin.appSecret = "4IDIda7l4Dph3bvK"
-linkedin.callback.protocol = "https"
-linkedin.callback.hostname = "cv.inuits.eu"
+linkedin.appKey = ""
+linkedin.appSecret = ""
+linkedin.callback.protocol = ""
+linkedin.callback.hostname = ""
 linkedin.callback.port = "443"
 
 [staging : production]
